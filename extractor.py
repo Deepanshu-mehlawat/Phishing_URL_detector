@@ -3,6 +3,8 @@ import requests
 from bs4 import BeautifulSoup
 
 def extract_hyperlinks(html_content):
+    if not html_content:
+        return []
     soup = BeautifulSoup(html_content, 'html.parser')
     anchor_tags = soup.find_all('a')
     return anchor_tags
