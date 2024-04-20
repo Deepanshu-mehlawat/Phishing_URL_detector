@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Assistant</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://kit.fontawesome.com/d91f0db9b6.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+    </div>
+    <div class="box">
+        <h1 style="color: red;" >!!! ALERT !!!</h1>
+        <div class="input">
+            <form action="">
+                <p>This website is suspicious and may contain malware.</p>
+                <!-- <input type="text" id="url" placeholder="Enter URL"> -->
+                <!-- <button id="searcch_btn" ><i class="fa-solid fa-magnifying-glass"></i></button> -->
+            </form>
+            <div class="output">
+                <!-- Output -->
+                <button id="back" onclick="back()"><a href="{{ url_for('back')}}">BACK</a></button>
+                <button id="proceed" onclick="pro()"><a href="{{ url }}">PROCEED</a></button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

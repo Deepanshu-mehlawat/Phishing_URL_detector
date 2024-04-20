@@ -8,12 +8,12 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('index.html')
+    return render_template('index.html',output="")
 
 @app.route('/check',methods=['GET','POST'])
 def check():
     if request.method == 'POST':
-        url = request.form['url']  # Use request.form.get('url') to safely retrieve the form data
+        url = request.form['url']  
         data = extractor.extract_features_from_url(url)
         data = pd.DataFrame(data, index=[0])
         model = load('svm.joblib')
@@ -21,10 +21,18 @@ def check():
         if ans[0]:
             return redirect(url)
         else:
-            return render_template('failure.html')
+            return render_template('error.html',url=url)
     else:
-        # Handle GET request (if needed)
         pass
+
+@app.route('/go/<path:url>')
+def go(url):
+    return redirect(url)
+
+@app.route('/back')
+def back():
+    return redirect('/home')
+
 if __name__ == '__main__':
     app.run(debug=True)
 

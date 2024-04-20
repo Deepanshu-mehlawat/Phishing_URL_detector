@@ -23,7 +23,7 @@
     text-align: center;
 }
 .box:hover{
-    transform: scale(1.02);
+    transform: scale(1.1);
     transition: transform 0.5s;
 }
 
@@ -56,7 +56,7 @@
 }
 
 #url:hover{
-    box-shadow: 0vw 0vw 2vw grey;
+    box-shadow: 0vw 0vw 2vw red;
 }
 
 .fa-solid.fa-magnifying-glass{
@@ -67,5 +67,43 @@
 .output{
     color: rgb(102, 146, 35);
     font-size: 3vw;
-    margin-top: 2vw;
+}
+
+.input p{
+    margin-top: 1vw;
+    font-size: 3vw;
+}
+
+#back{
+    font-size: 2vw;
+    height: 3vw;
+    width: 6vw;
+    cursor: pointer;
+    border-radius: 0.5vw;
+    color: white;
+    margin-right: 1vw;
+    background-color: rgb(108, 214, 108);
+}
+
+#back:hover{
+    box-shadow: 0vw 0vw 1vw gray;
+}
+#proceed:hover{
+    box-shadow: 0vw 0vw 1vw gray;
+}
+
+#proceed{
+    cursor: pointer;
+    margin-left: 3vw;
+    color: white;
+    border-radius: 0.5vw;
+    background-color: red;
+    font-size: 2vw;
+    height: 3vw;
+    width: 11vw;
+}
+
+a{
+    text-decoration:none;
+color:white;
 }
