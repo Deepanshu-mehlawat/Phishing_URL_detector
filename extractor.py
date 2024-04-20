@@ -1,9 +1,40 @@
 from urllib.parse import urlparse
+import requests
+from bs4 import BeautifulSoup
+
+def extract_hyperlinks(html_content):
+    soup = BeautifulSoup(html_content, 'html.parser')
+    anchor_tags = soup.find_all('a')
+    return anchor_tags
+
+def calculate_null_self_redirect_hyperlinks_percentage(anchor_tags):
+    total_hyperlinks = len(anchor_tags)
+    null_or_self_redirect_count = 0
+    
+    for tag in anchor_tags:
+        href = tag.get('href')
+        if href is None or href.strip() == '' or href.strip() == '#':
+            null_or_self_redirect_count += 1
+    
+    if total_hyperlinks > 0:
+        percentage = (null_or_self_redirect_count / total_hyperlinks)
+    else:
+        percentage = 0
+    
+    return percentage
+
+def retrieve_webpage(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.text
+    else:
+        return None
 
 def extract_features_from_url(url):
     parsed_url = urlparse(url)
-
-    # Initialize feature dictionary
+    text=retrieve_webpage(url)
+    a=extract_hyperlinks(text)
+    hyper=calculate_null_self_redirect_hyperlinks_percentage(a)
     features = {
         'NumDots': url.count('.'),
         'SubdomainLevel': len(parsed_url.netloc.split('.')) - 1,
@@ -28,7 +59,8 @@ def extract_features_from_url(url):
         'HostnameLength': len(parsed_url.netloc),
         'PathLength': len(parsed_url.path),
         'QueryLength': len(parsed_url.query),
-        'DoubleSlashInPath': '//' in parsed_url.path
+        'DoubleSlashInPath': '//' in parsed_url.path,
+        'PctNullSelfRedirectHyperlinks':hyper
     }
 
     return features
